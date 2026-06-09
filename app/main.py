@@ -1,5 +1,4 @@
 from __future__ import annotations
-import math
 
 
 class Distance:
@@ -13,20 +12,18 @@ class Distance:
     def __repr__(self) -> str:
         return f"Distance(km={self.km})"
 
-    def __add__(self, other: Distance | int | float) -> Distance:
+    def __add__(self, other: Distance | int) -> Distance:
 
         if isinstance(other, Distance):
             return Distance(self.km + other.km)
-        elif isinstance(other, int | float):
+        elif isinstance(other, int):
             return Distance(self.km + other)
-        else:
-            return self
 
-    def __iadd__(self, other: Distance | int | float) -> Distance:
+    def __iadd__(self, other: Distance | int) -> Distance:
 
         if isinstance(other, Distance):
             self.km += other.km
-        elif isinstance(other, int | float):
+        elif isinstance(other, int):
             self.km += other
         return self
 
@@ -36,7 +33,7 @@ class Distance:
 
     def __truediv__(self, other: int | float) -> Distance:
 
-        return Distance(math.ceil(self.km / other * 100) / 100)
+        return Distance(round(self.km / other))
 
     def __lt__(self, other: int | float | Distance) -> bool:
 
